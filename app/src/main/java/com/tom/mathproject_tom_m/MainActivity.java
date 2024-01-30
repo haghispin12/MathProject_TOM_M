@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button check;
     private Button save;
     private Button allpar;
-    private int num1;
-    private int num2;
-    private int num3;
+    private  Exersise e1 =new Exersise();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         etgar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateetgernumbers();
+                e1.generateetgernumbers();
                 updateview();
             }
 
@@ -53,21 +51,21 @@ public class MainActivity extends AppCompatActivity {
         ad20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generatead20numbers();
+                e1.generatead20numbers();
                 updateview();
             }
         });
         loach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateloachnumbers();
+                e1.generateloachnumbers();
                 updateview();
             }
         });
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (check())
+               if (e1.check(enteranswer.getText().toString()))
                    Toast.makeText(MainActivity.this ,"Sucssesfull",Toast.LENGTH_LONG).show();
                else
                    Toast.makeText(MainActivity.this ,"eror",Toast.LENGTH_LONG).show();
@@ -88,34 +86,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-public  void generateloachnumbers(){//לוח הכפל
-    Random r=new Random();
-    this.num1=r.nextInt(10);
-    this.num2=r.nextInt(10);
-}
-    public   void generatead20numbers(){//ad20
-        Random r=new Random();
-        this.num1=r.nextInt(10);
-        this.num2=r.nextInt(10)+10;
-    }
-    public   void generateetgernumbers(){//etger
-        Random r=new Random();
-        this.num1=r.nextInt(10);
-        this.num2=r.nextInt(90)+10;
-    }
+
     public void updateview(){
-        firstrandom.setText(num1+" ");
-        secondrandom.setText(num2+" ");
+        firstrandom.setText(e1.getNum1()+" ");
+        secondrandom.setText(e1.getNum2()+" ");
     }
 
-    public boolean check(){
-        num3=num1*num2;
-        String res=num3+"";
-        if (enteranswer.getText().toString().equals(res))
-            return true;
-        else
-            return false;
 
 
     }
-}
