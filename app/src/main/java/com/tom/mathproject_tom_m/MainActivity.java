@@ -1,6 +1,9 @@
 package com.tom.mathproject_tom_m;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -22,11 +25,33 @@ public class MainActivity extends AppCompatActivity {
     private Button save;
     private Button allpar;
     private  Exersise e1 =new Exersise();
+    private Vm viewModelMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initview();
+        viewModelMain=new ViewModelProvider(this).get(Vm.class);
+
+        viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
+
+            @Override
+
+            public void onChanged(Integer num1) {
+                firstrandom.setText(num1+" ");
+            }
+
+        });
+        viewModelMain.Vnum2.observe(this, new Observer<Integer>() {
+
+            @Override
+
+            public void onChanged(Integer num1) {
+                secondrandom.setText(num1+" ");
+            }
+
+        });
     }
 
     public  void initview() {
@@ -43,29 +68,29 @@ public class MainActivity extends AppCompatActivity {
         etgar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                e1.generateetgernumbers();
-                updateview();
+                viewModelMain.vChalenge();
+
             }
 
         });
         ad20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                e1.generatead20numbers();
-                updateview();
+                viewModelMain.Ad20();
+
             }
         });
         loach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                e1.generateloachnumbers();
-                updateview();
+                viewModelMain.loach();
+
             }
         });
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (e1.check(enteranswer.getText().toString()))
+               if (viewModelMain.check(enteranswer.getText().toString()))
                    Toast.makeText(MainActivity.this ,"Sucssesfull",Toast.LENGTH_LONG).show();
                else
                    Toast.makeText(MainActivity.this ,"eror",Toast.LENGTH_LONG).show();
@@ -87,10 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void updateview(){
-        firstrandom.setText(e1.getNum1()+" ");
-        secondrandom.setText(e1.getNum2()+" ");
-    }
+
 
 
 
