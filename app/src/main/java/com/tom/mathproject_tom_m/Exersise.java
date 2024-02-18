@@ -28,7 +28,6 @@ public class Exersise {
             String res=num3+"";
             if (res.equals(str))
                 return true;
-
                 return false;
 
         }

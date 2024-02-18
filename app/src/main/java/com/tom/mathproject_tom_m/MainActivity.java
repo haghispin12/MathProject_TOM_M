@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initview();
+        Intent intent=getIntent();
+        String Username1=intent.getStringExtra("UserName1");
+        Toast.makeText(MainActivity.this ,Username1,Toast.LENGTH_LONG).show();
         viewModelMain=new ViewModelProvider(this).get(Vm.class);
 
         viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
 
     public  void initview() {
         etgar = findViewById(R.id.etgar);
