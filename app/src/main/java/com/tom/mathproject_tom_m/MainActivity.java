@@ -1,10 +1,13 @@
 package com.tom.mathproject_tom_m;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private Button check;
     private Button save;
     private Button allpar;
+    private Button Rate;
     private  Exersise e1 =new Exersise();
     private Vm viewModelMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
         save = findViewById(R.id.save);
         allpar = findViewById(R.id.allpar);
         check=findViewById(R.id.check);
+            Rate=findViewById(R.id.Rate);
+
+        Rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, RateActivity.class);
+             //   ActivityResultLauncher.launch(intent);
+            }
+
+        });
+
 
         etgar.setOnClickListener(new View.OnClickListener() {
             @Override
