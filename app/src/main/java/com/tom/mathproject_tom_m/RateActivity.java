@@ -18,11 +18,12 @@ public class RateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
+        initview();
     }
 
     public void initview() {
-        Save.findViewById(R.id.save);
-        Seekbarr1.findViewById(R.id.Seekbarr1);
+        Save=findViewById(R.id.save);
+        Seekbarr1=findViewById(R.id.Seekbarr1);
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

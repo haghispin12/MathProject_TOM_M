@@ -1,7 +1,10 @@
 package com.tom.mathproject_tom_m;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -31,7 +34,14 @@ public class MainActivity extends AppCompatActivity {
     private Button Rate;
     private  Exersise e1 =new Exersise();
     private Vm viewModelMain;
+ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    @Override
+    public void onActivityResult(ActivityResult result) {
+        int myrate=result.getData().getIntExtra("Rate123", -1);
 
+        //Toast.makeText(MainActivity.this,str,Toast.LENGTH_SHORT);
+    }
+});
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this, RateActivity.class);
-             //   ActivityResultLauncher.launch(intent);
+              ActivityResultluncherLauncher.launch(intent);
             }
 
         });
