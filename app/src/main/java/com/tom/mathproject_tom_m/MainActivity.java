@@ -34,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private Button Rate;
     private  Exersise e1 =new Exersise();
     private Vm viewModelMain;
-ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivityResult
+        (new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
     @Override
     public void onActivityResult(ActivityResult result) {
         int myrate=result.getData().getIntExtra("Rate123", -1);
+        Toast.makeText(MainActivity.this, myrate + " ", Toast.LENGTH_SHORT).show();
 
-        //Toast.makeText(MainActivity.this,str,Toast.LENGTH_SHORT);
     }
 });
 
@@ -91,6 +92,7 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this, RateActivity.class);
               ActivityResultluncherLauncher.launch(intent);
+
             }
 
         });
