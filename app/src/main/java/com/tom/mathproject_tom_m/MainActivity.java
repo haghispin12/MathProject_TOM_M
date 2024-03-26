@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -52,6 +53,7 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
         Intent intent=getIntent();
         String Username1=intent.getStringExtra("UserName1");
         Toast.makeText(MainActivity.this ,Username1,Toast.LENGTH_LONG).show();
+        viewModelMain.setUserName(Username1);
         viewModelMain=new ViewModelProvider(this).get(Vm.class);
 
         viewModelMain.Vnum1.observe(this, new Observer<Integer>() {
@@ -139,7 +141,9 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
         allpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                trans.add(R.id.FragmentShowAllusers, new ShowUsersFragment());
+                trans.commit();
             }
         });
 

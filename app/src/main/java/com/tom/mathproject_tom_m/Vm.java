@@ -7,10 +7,12 @@ public class Vm extends ViewModel {
     MutableLiveData<Integer> Vnum1;
     MutableLiveData<Integer>Vnum2;
     Exersise exersise;
+    User user;
 public Vm(){
     Vnum1=new MutableLiveData<>();
     Vnum2=new MutableLiveData<>();
     exersise=new Exersise();
+    user=new User();
 }
 public void vChalenge(){
     exersise.generateetgernumbers();
@@ -46,5 +48,8 @@ public Boolean check(String str1){
 
     public void setVnum2(MutableLiveData<Integer> vnum2) {
         Vnum2 = vnum2;
+    }
+    public void setUserName(String Username1){
+    user.setName(Username1);
     }
 }
