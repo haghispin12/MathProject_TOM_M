@@ -55,4 +55,11 @@ public Boolean check(String str1){
     public void setUserRate(int Rate1){
     user.setRate(Rate1);
     }
+    public int getUserRate(){
+    return user.getRate();
+    }
+    public String getUsername(){
+    return user.getName();
+    }
+
 }
