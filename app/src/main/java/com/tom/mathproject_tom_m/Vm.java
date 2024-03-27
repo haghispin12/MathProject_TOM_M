@@ -52,4 +52,7 @@ public Boolean check(String str1){
     public void setUserName(String Username1){
     user.setName(Username1);
     }
+    public void setUserRate(int Rate1){
+    user.setRate(Rate1);
+    }
 }

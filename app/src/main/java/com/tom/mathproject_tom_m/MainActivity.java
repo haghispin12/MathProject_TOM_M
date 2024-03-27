@@ -52,6 +52,7 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
         initview();
         Intent intent=getIntent();
         String Username1=intent.getStringExtra("UserName1");
+       // int Rate123=intent.getIntExtra("Rate123");
         Toast.makeText(MainActivity.this ,Username1,Toast.LENGTH_LONG).show();
         viewModelMain=new ViewModelProvider(this).get(Vm.class);
         viewModelMain.setUserName(Username1);
