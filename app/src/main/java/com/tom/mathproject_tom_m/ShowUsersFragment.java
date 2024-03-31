@@ -37,9 +37,9 @@ TextView user1;
     }
 
     private void initView(View view) {
-       // user1=user1.findViewById(R.id.user1);
-        //user1.setText(MainViewmodel.getUsername());
-      //  rate23=rate23.findViewById(R.id.rate23);
-       // rate23.setText(MainViewmodel.getUserRate());
+     user1=view.findViewById(R.id.user1);
+        user1.setText(MainViewmodel.getUsername());
+      rate23=view.findViewById(R.id.rate23);
+       rate23.setText(MainViewmodel.getUserRate()+"");
     }
 }
