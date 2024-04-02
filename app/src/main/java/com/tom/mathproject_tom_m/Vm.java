@@ -61,5 +61,12 @@ public Boolean check(String str1){
     public String getUsername(){
     return user.getName();
     }
+    public String getUserScore(){
+    String S10=  "" +user.getScore();
+    return S10;
+    }
+    public void updateUserScore(int ScorePoints){
+    user.updateScore(ScorePoints);
+    }
 
 }

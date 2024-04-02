@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button Rate;
     private  Exersise e1 =new Exersise();
     private Vm viewModelMain;
+    int scorepoints;
 ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivityResult
         (new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
     @Override
@@ -106,6 +107,7 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
             @Override
             public void onClick(View v) {
                 viewModelMain.vChalenge();
+                scorepoints=20;
 
             }
 
@@ -114,21 +116,23 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
             @Override
             public void onClick(View v) {
                 viewModelMain.Ad20();
-
+                scorepoints=15;
             }
         });
         loach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModelMain.loach();
-
+                scorepoints=10;
             }
         });
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (viewModelMain.check(enteranswer.getText().toString()))
-                   Toast.makeText(MainActivity.this ,"Sucssesfull",Toast.LENGTH_LONG).show();
+               if (viewModelMain.check(enteranswer.getText().toString())) {
+                   Toast.makeText(MainActivity.this, "Sucssesfull", Toast.LENGTH_LONG).show();
+                   viewModelMain.updateUserScore(scorepoints);
+               }
                else
                    Toast.makeText(MainActivity.this ,"eror",Toast.LENGTH_LONG).show();
 

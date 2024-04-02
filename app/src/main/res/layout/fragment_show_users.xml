@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="score:10"
             android:layout_marginLeft="30dp"
-            android:id="@+id/score"
+            android:id="@+id/score12345"
             />
 
         <TextView
@@ -54,17 +54,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Picture"
-            android:id="@+id/picture"/>
+            android:id="@+id/picture"
+            android:layout_gravity="center"
+            />
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:id="@+id/pic1"/>
+            android:layout_width="250dp"
+            android:layout_height="350dp"
+            android:id="@+id/pic1"
+            android:layout_gravity="center"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add user"
             android:layout_gravity="center"
-            android:id="@+id/adduser"/>
+            android:id="@+id/adduser"
+
+            />
     </LinearLayout>
 
 

@@ -5,6 +5,7 @@ public class User {
     private int Score;
     private int Rate;
 
+
     public int getScore() {
         return Score;
     }
@@ -27,5 +28,8 @@ public class User {
 
     public void setRate(int rate) {
         Rate = rate;
+    }
+    public void updateScore(int scorePoints){
+        Score+=scorePoints;
     }
 }

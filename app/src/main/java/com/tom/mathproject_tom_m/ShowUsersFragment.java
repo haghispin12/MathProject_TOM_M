@@ -29,6 +29,7 @@ public class ShowUsersFragment extends Fragment {
 
 Vm MainViewmodel;
 TextView user1;
+    TextView score12345;
     TextView rate23;
     Button picture;
     Uri uri;
@@ -74,6 +75,8 @@ TextView user1;
     }
 
     private void initView(View view) {
+        score12345=view.findViewById(R.id.score12345);
+        score12345.setText(MainViewmodel.getUserScore());
      user1=view.findViewById(R.id.user1);
         user1.setText(MainViewmodel.getUsername());
       rate23=view.findViewById(R.id.rate23);
