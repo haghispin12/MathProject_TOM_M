@@ -1,13 +1,18 @@
 package com.tom.mathproject_tom_m;
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
 public class Fruit {
+   ImageView imageView;
+   TextView tx;
     private String name;
     private int drawable;
-    public Fruit() {
+    public Fruit(String name,int drawable) {
         this.drawable = drawable;
         this.name = name;
     }
-    public String getName() {
+    public String getfruitName() {
         return name;
     }
     public int getDrawable() {
