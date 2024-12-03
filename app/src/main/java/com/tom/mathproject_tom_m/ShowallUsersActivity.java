@@ -1,13 +1,17 @@
 package com.tom.mathproject_tom_m;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ShowallUsersActivity extends AppCompatActivity {
-
+public class ShowallUsersActivity<rcShowUsers> extends AppCompatActivity {
+    private RecyclerView rcShowFruits;
+  // rcShowUsers=findViewById(R.id.rcShowUsers);
     public void  Showlist(){
         ArrayList<Fruit> fruits=new ArrayList<>();
         fruits.add(new Fruit("banana",R.drawable.img_1));
@@ -15,17 +19,24 @@ public class ShowallUsersActivity extends AppCompatActivity {
         fruits.add(new Fruit("orange",R.drawable.img));
         fruits.add(new Fruit("grapes",R.drawable.img_2));
         fruits.add(new Fruit("lemon",R.drawable.img_3));
-        fruits.add(new Fruit("fruits",R.drawable.img_4);
-     AdapterFruit adapterFruit=new AdapterFruit(fruits,new adapterFruit.OnItemClickListener()){
-        public void onItemClick(User item) {
-Toast.makeText(ShowFruitsActivity.this,item.getName(),Toast.LENGTH_SHORT).show();
-            }
-        }
+        fruits.add(new Fruit("fruits",R.drawable.img_4));
+     AdapterFruit adapterFruit =new AdapterFruit(fruits, new AdapterFruit.OnItemClickListener() {
+         @Override
+         public void onItemClick(Fruit item) {
+             Toast.makeText(ShowallUsersActivity.this,item.getfruitName(),Toast.LENGTH_SHORT).show();
+         }
+     }) {
+
+
+     };
+        rcShowFruits.setLayoutManager(new LinearLayoutManager(this));
+        rcShowFruits.setAdapter(adapterFruit);
+        rcShowFruits.setHasFixedSize(true);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showall_users);
-
+        Showlist();
     }
 }
