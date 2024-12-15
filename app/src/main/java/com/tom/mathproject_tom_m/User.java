@@ -10,6 +10,9 @@ public class User {
     private Uri uri;
     private long id;
 
+    public User(){
+
+    }
 
     public User(long id, String name, int rating, Bitmap bitmap, int score) {
         this.Name = name;
