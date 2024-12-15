@@ -147,8 +147,8 @@ ActivityResultLauncher<Intent> ActivityResultluncherLauncher = registerForActivi
         allpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ShowUsersFragment.class);
-                startActivity(intent);
+            //    Intent intent = new Intent(MainActivity.this,ShowUsersFragment.class);
+                //startActivity(intent);
              FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
                trans.add(R.id.FragmentShowAllusers, new ShowUsersFragment());
                 trans.commit();

@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.zip.Inflater;
 
@@ -34,6 +35,7 @@ TextView user1;
     TextView score12345;
     TextView rate23;
     Button picture;
+    Button adduser;
     Uri uri;
     ImageView pic1;
 
@@ -48,7 +50,7 @@ TextView user1;
                 public void onActivityResult(ActivityResult result) {
 
                     if (result.getResultCode() == RESULT_OK) {
-
+                        MainViewmodel.user.setUri(uri);
                       pic1.setImageURI(uri);
 
                     }
@@ -66,8 +68,7 @@ TextView user1;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Inflate the layout for this fragment
        View view= inflater.inflate(R.layout.fragment_show_users, container, false);
         MainViewmodel= new ViewModelProvider(requireActivity()).get(Vm.class);
@@ -77,6 +78,16 @@ TextView user1;
     }
 
     private void initView(View view) {
+        adduser=view.findViewById(R.id.adduser);
+        adduser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity()!=null){
+                    long id=MainViewmodel.dbAdduser(getActivity());
+                    Toast.makeText(getActivity(),"insert row id"+id,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         score12345=view.findViewById(R.id.score12345);
         score12345.setText(MainViewmodel.getUserScore());
      user1=view.findViewById(R.id.user1);
@@ -88,6 +99,7 @@ TextView user1;
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ContentValues values = new ContentValues();
 
                 values.put(MediaStore.Images.Media.TITLE, "New Picture");

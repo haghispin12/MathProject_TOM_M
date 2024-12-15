@@ -1,9 +1,53 @@
 package com.tom.mathproject_tom_m;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 public class User {
     private String Name;
     private int Score;
     private int Rate;
+    private Uri uri;
+    private long id;
+
+
+    public User(long id, String name, int rating, Bitmap bitmap, int score) {
+        this.Name = name;
+        this.Score = score;
+        this.Rate = rating;
+        this.bitmap = bitmap;
+        this.uri = uri;
+        this.id = id;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    private Bitmap bitmap;
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
 
 
     public int getScore() {

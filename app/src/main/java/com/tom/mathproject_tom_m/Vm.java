@@ -1,5 +1,8 @@
 package com.tom.mathproject_tom_m;
 
+import android.content.Context;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,6 +16,14 @@ public Vm(){
     Vnum2=new MutableLiveData<>();
     exersise=new Exersise();
     user=new User();
+}
+public long dbAdduser(Context context){
+    DBHelper dbHelper=new DBHelper(context);
+    long id=dbHelper.insert(user,context);
+    Log.d("Iduser",id+" ");
+    //if(id!=-1)
+    //dbgetusers(context);
+    return id;
 }
 public void vChalenge(){
     exersise.generateetgernumbers();
