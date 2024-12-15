@@ -40,7 +40,7 @@ public class AdapterFruit extends RecyclerView.Adapter<AdapterFruit.MyViewHolder
 
        @Override
        public int getItemCount() {
-           return 0;
+           return fruits.size();
        }
 
        public static class MyViewHolder extends RecyclerView.ViewHolder {

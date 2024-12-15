@@ -12,7 +12,7 @@ import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
 
-import com.hag.mathexerciseproject.classesModel.User;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -67,25 +67,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         // get the user back with the id
-        // also possible to return only the id
+         //also possible to return only the id
         public long insert(User user,Context context){
             database = getWritableDatabase(); // get access to write the database
             ContentValues values = new ContentValues();
-            values.put(COLUMN_NAME, user.getUserName());
-            values.put(COLUMN_RATE, user.getRating());
-            values.put(COLUMN_SCORE, user.getMyScore());
+            values.put(COLUMN_NAME, user.getName());
+            values.put(COLUMN_RATE, user.getRate());
+            values.put(COLUMN_SCORE, user.getScore());
 
             // stored as Binary Large OBject ->  BLOB
-            try {
-                values.put(COLUMN_PICTURE, getBytes(context,user.getUri()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+       //     try {
+              //  values.put(COLUMN_PICTURE, getBytes(context,user.getUri()));
+      //      } catch (IOException e) {
+         //       e.printStackTrace();
+           // }
 
-            long id = database.insert(TABLE_RECORD, null, values);
-            user.setId(id);
-            database.close();
-            return id;
+//            long id = database.insert(TABLE_RECORD, null, values);
+          //  user.setId(id);
+  //          database.close();
+            return user.getScore();
         }
 
         // remove a specific user from the table

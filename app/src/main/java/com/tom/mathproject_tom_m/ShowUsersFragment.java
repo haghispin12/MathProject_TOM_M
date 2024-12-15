@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.zip.Inflater;
+
 import kotlin.Result;
 
 
@@ -66,7 +68,7 @@ TextView user1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
        View view= inflater.inflate(R.layout.fragment_show_users, container, false);
         MainViewmodel= new ViewModelProvider(requireActivity()).get(Vm.class);
 
