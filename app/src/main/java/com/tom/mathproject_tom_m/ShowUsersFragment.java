@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 import kotlin.Result;
@@ -74,6 +76,15 @@ TextView user1;
         MainViewmodel= new ViewModelProvider(requireActivity()).get(Vm.class);
 
        initView(view);
+       if (getActivity()!=null){
+           MainViewmodel.Myusers.observe(getActivity(), new Observer<ArrayList<User>>() {
+               @Override
+               public void onChanged(ArrayList<User> users) {
+int n=0;
+               }
+           });
+           MainViewmodel.getMyusers(getActivity());
+       }
        return view;
     }
 

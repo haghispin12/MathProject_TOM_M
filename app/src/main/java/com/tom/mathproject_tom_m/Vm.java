@@ -6,16 +6,24 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class Vm extends ViewModel {
     MutableLiveData<Integer> Vnum1;
     MutableLiveData<Integer>Vnum2;
     Exersise exersise;
     User user;
+    MutableLiveData<ArrayList<User>> Myusers;
 public Vm(){
     Vnum1=new MutableLiveData<>();
     Vnum2=new MutableLiveData<>();
     exersise=new Exersise();
     user=new User();
+   Myusers= new MutableLiveData<>(new ArrayList<User>()) ;
+}
+public  void getMyusers(Context context){
+    DBHelper dbHelper=new DBHelper(context);
+    Myusers.setValue(dbHelper.selectAll());
 }
 public long dbAdduser(Context context){
     DBHelper dbHelper=new DBHelper(context);
