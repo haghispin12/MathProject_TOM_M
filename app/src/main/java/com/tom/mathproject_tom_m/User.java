@@ -9,7 +9,7 @@ public class User {
     private int Rate;
     private Uri uri;
     private long id;
-
+private Bitmap bitmap;
     public User(){
 
     }
@@ -31,7 +31,7 @@ public class User {
         this.bitmap = bitmap;
     }
 
-    private Bitmap bitmap;
+
 
     public Uri getUri() {
         return uri;

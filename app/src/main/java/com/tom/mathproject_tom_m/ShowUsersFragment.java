@@ -14,6 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -40,6 +42,7 @@ TextView user1;
     Button adduser;
     Uri uri;
     ImageView pic1;
+    RecyclerView recyclerView;
 
     ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
 
@@ -74,16 +77,26 @@ TextView user1;
         //Inflate the layout for this fragment
        View view= inflater.inflate(R.layout.fragment_show_users, container, false);
         MainViewmodel= new ViewModelProvider(requireActivity()).get(Vm.class);
-
+        recyclerView=view.findViewById(R.id.rcShowUsers1);
        initView(view);
        if (getActivity()!=null){
            MainViewmodel.Myusers.observe(getActivity(), new Observer<ArrayList<User>>() {
                @Override
                public void onChanged(ArrayList<User> users) {
-int n=0;
+             adapteruser ad123=new adapteruser(users, new adapteruser.OnItemClickListener1() {
+    @Override
+    public void onItemClick(User item) {
+
+    }
+});
+recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+recyclerView.setAdapter(ad123);
+recyclerView.setHasFixedSize(true);
                }
+
            });
            MainViewmodel.getMyusers(getActivity());
+
        }
        return view;
     }

@@ -58,8 +58,8 @@
             android:layout_gravity="center"
             />
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="350dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/pic1"
             android:layout_gravity="center"/>
         <Button
@@ -70,6 +70,11 @@
             android:id="@+id/adduser"
 
             />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rcShowUsers1"
+            tools:listitem="@layout/itemuser123"/>
     </LinearLayout>
 
 
