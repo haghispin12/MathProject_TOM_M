@@ -46,20 +46,20 @@ public class adapteruser extends RecyclerView.Adapter<adapteruser.MyViewHolder>{
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvuserName ;
-    //    TextView tvgrade;
+      TextView tvgrade;
         ImageView ivuserImg;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvuserName = itemView.findViewById(R.id.UserName);
             ivuserImg = itemView.findViewById(R.id.imageuser);
-         //  tvgrade=itemView.findViewById(R.id.grade);
+          tvgrade=itemView.findViewById(R.id.grade);
         }
 
         public void bind(final User item, final OnItemClickListener1 listener)      {
             tvuserName.setText(item.getName());
-            ivuserImg.setImageURI(item.getUri());
-      //   tvgrade.setText(item.getScore());
+            ivuserImg.setImageBitmap(item.getBitmap());
+        tvgrade.setText(item.getScore()+"");
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     listener.onItemClick(item);
