@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ import kotlin.Result;
 public class ShowUsersFragment extends Fragment implements MenuProvider {
 
 Vm MainViewmodel;
-TextView user1;
+EditText user1;
     TextView score12345;
     TextView rate23;
     Button picture;
@@ -48,6 +49,7 @@ TextView user1;
     Uri uri;
     ImageView pic1;
     RecyclerView recyclerView;
+   private User user123;
 
 
     ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
@@ -95,7 +97,8 @@ TextView user1;
              adapteruser ad123=new adapteruser(users, new adapteruser.OnItemClickListener1() {
     @Override
     public void onItemClick(User item) {
-        int n=0;
+        user123=item;
+        int n=10;
         itemDelete.setVisible(true);
         itemEdit.setVisible(true);
         MainViewmodel.user=item;
@@ -176,6 +179,11 @@ recyclerView.setHasFixedSize(true);
         switch (id) {
 
             case R.id.delete:
+                return true;
+            case R.id.edit:
+MainViewmodel.dbUpdateuser(user123,getActivity());
+
+
                 return true;
         }
         return false;

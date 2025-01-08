@@ -33,6 +33,10 @@ public long dbAdduser(Context context){
     //dbgetusers(context);
     return id;
 }
+    public void dbUpdateuser(User user2 ,Context context){
+        DBHelper dbHelper=new DBHelper(context);
+        dbHelper.update(user2);
+    }
 public void vChalenge(){
     exersise.generateetgernumbers();
     Vnum1.setValue(exersise.getNum1());
