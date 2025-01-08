@@ -49,6 +49,7 @@ TextView user1;
     ImageView pic1;
     RecyclerView recyclerView;
 
+
     ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
 
             new ActivityResultContracts.StartActivityForResult(),
@@ -68,6 +69,8 @@ TextView user1;
                 }
 
             });
+    private MenuItem itemDelete;
+    private MenuItem itemEdit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ TextView user1;
         MainViewmodel= new ViewModelProvider(requireActivity()).get(Vm.class);
         recyclerView=view.findViewById(R.id.rcShowUsers1);
        initView(view);
+
        if (getActivity()!=null){
            MainViewmodel.Myusers.observe(getActivity(), new Observer<ArrayList<User>>() {
                @Override
@@ -91,6 +95,13 @@ TextView user1;
              adapteruser ad123=new adapteruser(users, new adapteruser.OnItemClickListener1() {
     @Override
     public void onItemClick(User item) {
+        int n=0;
+        itemDelete.setVisible(true);
+        itemEdit.setVisible(true);
+        MainViewmodel.user=item;
+        score12345.setText(MainViewmodel.user.getScore()+"");
+        rate23.setText(MainViewmodel.user.getRate()+"");
+        user1.setText(MainViewmodel.user.getName());
 
     }
 });
@@ -103,6 +114,7 @@ recyclerView.setHasFixedSize(true);
            MainViewmodel.getMyusers(getActivity());
 
        }
+        requireActivity().addMenuProvider(this);
        return view;
     }
 
@@ -150,11 +162,22 @@ recyclerView.setHasFixedSize(true);
     @Override
     public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menuxml,menu);
-      //  itemDelete = menu.findItem(R.id.delete);
+        itemDelete = menu.findItem(R.id.delete);
+        itemDelete.setVisible(false);
+       itemEdit = menu.findItem(R.id.edit);
+        itemEdit.setVisible(false);
+       // super.onCreateOptionsMenu(menu,menuInflater);
     }
 
     @Override
     public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        switch (id) {
+
+            case R.id.delete:
+                return true;
+        }
         return false;
     }
 }
