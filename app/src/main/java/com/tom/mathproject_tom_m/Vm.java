@@ -33,6 +33,11 @@ public long dbAdduser(Context context){
     //dbgetusers(context);
     return id;
 }
+public void DeleteUser(Context context,Long id){
+    DBHelper dbHelper=new DBHelper(context);
+    dbHelper.deleteById(id);
+    getMyusers(context);
+}
     public void dbUpdateuser(User user2 ,Context context){
         DBHelper dbHelper=new DBHelper(context);
         dbHelper.update(user2);

@@ -2,7 +2,9 @@ package com.tom.mathproject_tom_m;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -179,6 +181,7 @@ recyclerView.setHasFixedSize(true);
         switch (id) {
 
             case R.id.delete:
+                openDeleteUser();
                 return true;
             case R.id.edit:
 MainViewmodel.dbUpdateuser(user123,getActivity());
@@ -188,4 +191,37 @@ MainViewmodel.dbUpdateuser(user123,getActivity());
         }
         return false;
     }
+
+    private void openDeleteUser() {
+        AlertDialog.Builder alertDialog = new
+
+                AlertDialog.Builder(requireActivity());
+
+        alertDialog.setTitle("delete");
+
+                alertDialog.setMessage("do you want to delete");
+
+        alertDialog.setIcon(R.drawable.img_1);
+
+        alertDialog.setCancelable(true);
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+MainViewmodel.DeleteUser(getActivity(),user123.getId());
+                dialog.dismiss();
+
+            }
+
+        });
+        alertDialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog= alertDialog.create();
+        dialog.show();
+    }
+
 }
