@@ -1,4 +1,4 @@
-package com.tom.mathproject_tom_m;
+package com.tom.mathproject_tom_m.mathproj;
 
 import android.content.Context;
 import android.util.Log;

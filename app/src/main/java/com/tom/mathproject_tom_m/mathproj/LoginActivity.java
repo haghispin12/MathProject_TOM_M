@@ -1,4 +1,4 @@
-package com.tom.mathproject_tom_m;
+package com.tom.mathproject_tom_m.mathproj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.tom.mathproject_tom_m.R;
 
 public class LoginActivity extends AppCompatActivity {
 private Button Start;

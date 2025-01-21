@@ -1,4 +1,4 @@
-package com.tom.mathproject_tom_m;
+package com.tom.mathproject_tom_m.mathproj;
 
 import android.graphics.Bitmap;
 import android.net.Uri;

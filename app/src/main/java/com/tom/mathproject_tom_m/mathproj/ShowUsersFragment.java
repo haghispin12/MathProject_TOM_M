@@ -1,4 +1,4 @@
-package com.tom.mathproject_tom_m;
+package com.tom.mathproject_tom_m.mathproj;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -34,10 +34,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+import com.tom.mathproject_tom_m.R;
 
-import kotlin.Result;
+import java.util.ArrayList;
 
 
 public class ShowUsersFragment extends Fragment implements MenuProvider {

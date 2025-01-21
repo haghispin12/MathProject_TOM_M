@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityTaki123"
+    android:orientation="vertical"
+    android:background="@drawable/img_7">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/Name"
+        android:text="username12"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/Score12"
+
+            android:text="Score:"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:id="@+id/creatgame"
+                android:text="CREAT GAME"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:id="@+id/Gameid"
+                android:text="GAMEid is"
+                android:layout_marginTop="50dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="50dp">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:id="@+id/JoinGame"
+                android:text="JOIN GAME"/>
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:id="@+id/iD"
+                android:layout_marginTop="50dp"/>
+
+            <Button
+                android:id="@+id/OkStartGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:layout_marginTop="50dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -13,21 +13,39 @@
         android:theme="@style/Theme.MathProject_TOM_M"
         tools:targetApi="31">
         <activity
-            android:name=".ShowallUsersActivity"
+            android:name=".LoginTakiActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RateActivity"
+            android:name=".ui.login.LoginActivityTaki"
+            android:exported="false"
+            android:label="@string/title_activity_login_taki" />
+        <activity
+            android:name=".MainActivityTaki123"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".mathproj.ShowallUsersActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".mathproj.RateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".mathproj.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +58,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".mathproj.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

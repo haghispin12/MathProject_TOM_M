@@ -1,4 +1,4 @@
-package com.tom.mathproject_tom_m;
+package com.tom.mathproject_tom_m.mathproj;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.provider.Telephony;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+
+import com.tom.mathproject_tom_m.R;
 
 public class RateActivity extends AppCompatActivity {
     private Button Save;
