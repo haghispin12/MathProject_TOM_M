@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "411609001192",
+    "project_id": "takiproject-tom-m",
+    "storage_bucket": "takiproject-tom-m.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411609001192:android:e62c5f73da9cc0c7e1ad5d",
+        "android_client_info": {
+          "package_name": "com.tom.mathproject_tom_m"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn1dGH3mICRkaBErUwhG-_hf6iiI0AKDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

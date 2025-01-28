@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class LoginTakiActivity extends AppCompatActivity {
 Button btlogin;
 Button btConnected;
@@ -18,5 +20,7 @@ Button btSubmit;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_taki2);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        int n=10;
     }
 }

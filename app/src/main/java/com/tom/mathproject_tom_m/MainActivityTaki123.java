@@ -39,5 +39,11 @@ TextView Name;
                 OkStartGame.setVisibility(View.VISIBLE);
             }
         });
+        OkStartGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
