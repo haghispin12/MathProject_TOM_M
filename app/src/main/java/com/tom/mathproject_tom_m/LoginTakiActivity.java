@@ -38,6 +38,8 @@ Button btSignUp;
     }
 
     private void initview() {
+        etPassowrd=findViewById(R.id.etPassowrd);
+        etEmail=findViewById(R.id.etEmail);
         btSignUp=findViewById(R.id.btSignUp);
         btConnected=findViewById(R.id.btConnected);
         btConnected.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +66,7 @@ Button btSignUp;
             @Override
             public void onClick(View v) {
                auth= FirebaseAuth.getInstance();
-                if(auth.getCurrentUser()!=null){
+
                     auth.createUserWithEmailAndPassword(etEmail.getText().toString(),etPassowrd.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -77,7 +79,7 @@ Button btSignUp;
                     });
                 }
 
-            }
+
         });
     }
 }
