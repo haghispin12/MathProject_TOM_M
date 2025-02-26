@@ -3,6 +3,7 @@ package com.tom.mathproject_tom_m;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -49,20 +50,21 @@ Button btSignUp;
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             Toast.makeText(LoginTakiActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
+                            Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+                            intent.putExtra("UserName2",etEmail.getText().toString());
+                            startActivity(intent);
+                        }
+                        else {
                             Toast.makeText(LoginTakiActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
-                startActivity(intent);
+
             }
         });
         btSignUp.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
                auth= FirebaseAuth.getInstance();

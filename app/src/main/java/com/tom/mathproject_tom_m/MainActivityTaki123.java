@@ -2,11 +2,15 @@ package com.tom.mathproject_tom_m;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.tom.mathproject_tom_m.mathproj.MainActivity;
 
 public class MainActivityTaki123 extends AppCompatActivity {
 Button creatgame;
@@ -22,6 +26,9 @@ TextView Name;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_taki123);
         initview();
+        Intent intent=getIntent();
+        String Username2=intent.getStringExtra("UserName2");
+        Toast.makeText(MainActivityTaki123.this ,Username2,Toast.LENGTH_LONG).show();
     }
 
     private void initview() {
