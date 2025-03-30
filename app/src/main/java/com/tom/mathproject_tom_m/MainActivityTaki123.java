@@ -1,5 +1,6 @@
 package com.tom.mathproject_tom_m;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,9 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.tom.mathproject_tom_m.mathproj.MainActivity;
 
 public class MainActivityTaki123 extends AppCompatActivity {
+    private  String Username2;
 Button creatgame;
 TextView Name;
     TextView Score12;
@@ -21,13 +27,14 @@ TextView Name;
     EditText iD;
     Button OkStartGame;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_taki123);
         initview();
         Intent intent=getIntent();
-        String Username2=intent.getStringExtra("UserName2");
+         Username2=intent.getStringExtra("UserName2");
         Toast.makeText(MainActivityTaki123.this ,Username2,Toast.LENGTH_LONG).show();
     }
 
@@ -50,6 +57,26 @@ TextView Name;
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        creatgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GAME game1= new GAME((int)Math.random()*1000000000,Username2);
+                GameMode(game1);
+            }
+        });
+    }
+    public void GameMode(GAME game2){
+        FirebaseFirestore.getInstance().collection("game2").document().set(game2).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(MainActivityTaki123.this,"add student has been success",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivityTaki123.this,"add student has been failed",Toast.LENGTH_SHORT).show();
             }
         });
     }
