@@ -34,8 +34,16 @@ Button btSignUp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_taki2);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        auth= FirebaseAuth.getInstance();
+
        // int n=10;
         initview();
+
+       if (auth.getCurrentUser()!=null) {
+           Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+           intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
+           startActivity(intent);
+       }
     }
 
     private void initview() {
@@ -67,7 +75,7 @@ Button btSignUp;
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
-               auth= FirebaseAuth.getInstance();
+
 
                     auth.createUserWithEmailAndPassword(etEmail.getText().toString(),etPassowrd.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

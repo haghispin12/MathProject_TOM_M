@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tom.mathproject_tom_m.mathproj.MainActivity;
 
@@ -26,6 +27,7 @@ TextView Name;
     Button JoinGame;
     EditText iD;
     Button OkStartGame;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -62,8 +64,9 @@ TextView Name;
         creatgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GAME game1= new GAME((int)Math.random()*1000000000,Username2);
+                GAME game1= new GAME(Username2);
                 GameMode(game1);
+                Gameid.setText(game1.getIdGame());
             }
         });
     }
@@ -79,5 +82,22 @@ TextView Name;
                 Toast.makeText(MainActivityTaki123.this,"add student has been failed",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void updateSingleField(String collectionPath, String documentId, String field, Object value, Runnable onSuccess, com.google.android.gms.tasks.OnFailureListener onFailure) {
+        db.collection(collectionPath)
+                .document(documentId)
+                .update(field, value)
+                .addOnSuccessListener(aVoid -> {
+                    if (onSuccess != null) {
+                        onSuccess.run();
+                    }
+                    System.out.println("Field '" + field + "' successfully updated!");
+                })
+                .addOnFailureListener(e -> {
+                    if (onFailure != null) {
+                        onFailure.onFailure(e);
+                    }
+                    System.err.println("Error updating field '" + field + "': " + e);
+                });
     }
 }
