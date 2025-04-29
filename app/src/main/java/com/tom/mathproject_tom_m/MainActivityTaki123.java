@@ -72,7 +72,7 @@ String s1= String.valueOf(iD.getText());
              if (game1.getStatus()==1) {
                  Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                  intent.putExtra("UserName2", Username2);
-               //  intent.putExtra("Game", game1);
+                 //  intent.putExtra("Game", game1);
                  startActivity(intent);
              }
 
