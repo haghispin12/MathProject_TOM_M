@@ -34,7 +34,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
     Button JoinGame;
     EditText iD;
     Button OkStartGame;
-
+    private GAME game1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
         Username2 = intent.getStringExtra("UserName2");
         Toast.makeText(MainActivityTaki123.this, Username2, Toast.LENGTH_LONG).show();
         Name.setText(Username2);
-
+        game1 = new GAME(Username2);
      }
 
     private void initview() {
@@ -67,6 +67,15 @@ public class MainActivityTaki123 extends AppCompatActivity {
         OkStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+String s1= String.valueOf(iD.getText());
+                updateSingl(s1);
+             if (game1.getStatus()==1) {
+                 Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
+                 intent.putExtra("UserName2", Username2);
+               //  intent.putExtra("Game", game1);
+                 startActivity(intent);
+             }
+
 //                FirebaseFirestore.getInstance().collection("game2").whereEqualTo().document().update("Uid2","tom").whereEqualTo("idGame","15b2610a-5a35-4387-914a-41dab894c4e3").getFirestore().document().addSnapshotListener(new EventListener<QuerySnapshot>() {
 //                    @Override
 //                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -78,17 +87,16 @@ public class MainActivityTaki123 extends AppCompatActivity {
         creatgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GAME game1 = new GAME(Username2);
                 GameMode(game1);
                 Gameid.setText( "Game id is: " + game1.getIdGame());
             }
         });
     }
 
-    public void GameMode(GAME game2) {
+    public void GameMode(GAME games) {
 
 
-        FirebaseFirestore.getInstance().collection("game2").add(game2).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        FirebaseFirestore.getInstance().collection("games").add(games).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 Log.d("","");
@@ -110,6 +118,21 @@ public class MainActivityTaki123 extends AppCompatActivity {
 //                        Toast.makeText(MainActivityTaki123.this, "add student has been failed", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
+    }
+    public void updateSingl(String documantId){
+        FirebaseFirestore.getInstance().collection("games").document(documantId).update("uid2",Username2,"status",1).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(MainActivityTaki123.this, "update student has been success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivityTaki123.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }

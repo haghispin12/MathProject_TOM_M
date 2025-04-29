@@ -72,7 +72,7 @@ Button btSignUp;
             }
         });
         btSignUp.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SuspiciousIndentation")
+@SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
 

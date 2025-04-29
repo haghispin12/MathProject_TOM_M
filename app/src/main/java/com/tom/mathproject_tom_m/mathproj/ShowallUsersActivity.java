@@ -22,7 +22,7 @@ public class ShowallUsersActivity<rcShowUsers> extends AppCompatActivity {
         fruits.add(new Fruit("orange", R.drawable.img));
         fruits.add(new Fruit("grapes", R.drawable.img_2));
         fruits.add(new Fruit("lemon", R.drawable.img_3));
-        fruits.add(new Fruit("fruits", R.drawable.img_4));
+        fruits.add(new Fruit("fruits", R.drawable.fruits1));
         AdapterFruit adapterFruit = new AdapterFruit(fruits, new AdapterFruit.OnItemClickListener() {
             @Override
             public void onItemClick(Fruit item) {
