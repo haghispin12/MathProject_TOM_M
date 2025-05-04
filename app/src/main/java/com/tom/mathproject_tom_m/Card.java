@@ -3,6 +3,17 @@ package com.tom.mathproject_tom_m;
 public class Card {
     private int Number;
     private String Color;
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    private int image;
+
     public int getNumber() {
         return Number;
     }
