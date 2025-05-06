@@ -4,6 +4,12 @@ public class Card {
     private int Number;
     private String Color;
 
+    public Card(int number, String color, int image) {
+        Number = number;
+        Color = color;
+        this.image = image;
+    }
+
     public int getImage() {
         return image;
     }

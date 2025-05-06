@@ -1,3 +1,5 @@
+package com.tom.mathproject_tom_m;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -5,11 +7,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.tom.mathproject_tom_m.Card;
-import com.tom.mathproject_tom_m.R;
-import com.tom.mathproject_tom_m.mathproj.Fruit;
-import com.tom.mathproject_tom_m.mathproj.User;
 
 import java.util.ArrayList;
 

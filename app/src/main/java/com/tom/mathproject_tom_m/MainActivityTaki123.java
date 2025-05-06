@@ -18,10 +18,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tom.mathproject_tom_m.mathproj.MainActivity;
 
@@ -40,6 +44,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_taki123);
+
         initview();
         Intent intent = getIntent();
         Username2 = intent.getStringExtra("UserName2");
@@ -67,14 +72,15 @@ public class MainActivityTaki123 extends AppCompatActivity {
         OkStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-String s1= String.valueOf(iD.getText());
-                updateSingl(s1);
-             if (game1.getStatus()==1) {
-                 Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
-                 intent.putExtra("UserName2", Username2);
-                 //  intent.putExtra("Game", game1);
-                 startActivity(intent);
-             }
+                String s1 = String.valueOf(iD.getText());
+                if (game1.getStatus() == 1) {
+                    updateSingl(s1);
+                    Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
+                    intent.putExtra("UserName2", Username2);
+                    //  intent.putExtra("Game", game1);
+                    startActivity(intent);
+                }
+            }
 
 //                FirebaseFirestore.getInstance().collection("game2").whereEqualTo().document().update("Uid2","tom").whereEqualTo("idGame","15b2610a-5a35-4387-914a-41dab894c4e3").getFirestore().document().addSnapshotListener(new EventListener<QuerySnapshot>() {
 //                    @Override
@@ -82,14 +88,20 @@ String s1= String.valueOf(iD.getText());
 //                        //value.getD;
 //                    }
 //                });
-            }
+
         });
         creatgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GameMode(game1);
-                Gameid.setText( "Game id is: " + game1.getIdGame());
-            }
+                    // Example in your Application class's onCreate() method
+
+
+
+                }
+
+
+
         });
     }
 
@@ -99,8 +111,34 @@ String s1= String.valueOf(iD.getText());
         FirebaseFirestore.getInstance().collection("games").add(games).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
-                Log.d("","");
+                Log.d("documentid",task.getResult().getId());
                 Gameid.setText(task.getResult().getId());
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference userDocRef = db.collection("games").document(task.getResult().getId());
+                //Query activeUsersQuery = db.collection("users").whereEqualTo("isActive", true);
+                ListenerRegistration userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("FirestoreListener", "Listen failed.", e);
+                            return;
+                        }
+
+                        if (snapshot != null && snapshot.exists()) {
+                            Log.d("FirestoreListener", "Current user data: " + snapshot.getData());
+                            // Process the document data here (Java)
+                            double Status = snapshot.getDouble("Status");
+                            if(Status==1){
+                                Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
+                                intent.putExtra("UserName2", Username2);
+                                //  intent.putExtra("Game", game1);
+                                startActivity(intent);
+                            }
+                        } else {
+                            Log.d("FirestoreListener", "Current data: null");
+                        }
+                    }
+                });
             }
 
         });
