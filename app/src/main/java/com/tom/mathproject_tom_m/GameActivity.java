@@ -19,8 +19,8 @@ public class GameActivity extends AppCompatActivity {
     ImageView garbage;
   private  RecyclerView RCard;
 
-   private ArrayList<Card> cards;
-   Card [] arrCards;
+   private ArrayList<Card> cards;//recycleview
+   Card [] arrCards;//מערך של כל הקלפים שיש
   private AdapterCard adapterCard2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void initview() {
 RCard=findViewById(R.id.RCard);
+        creatArrCards();
+        startGame();
     }
     public void creatcards(){
         cards.add(new Card(1,"blue",R.drawable.blue1));
@@ -59,7 +61,7 @@ RCard=findViewById(R.id.RCard);
         RCard.setHasFixedSize(true);
     }
     public Card RandomCard(){
-        int num= (int) (Math.random()*12+1);
+        int num= (int) (Math.random()*12);
         Card c1=arrCards[num];
         return c1;
     }
@@ -79,5 +81,30 @@ RCard=findViewById(R.id.RCard);
         return true;
     }
 
-
+public void creatArrCards(){
+    Card c0 =new Card(1,"red",R.drawable.red1);
+    Card c1 =new Card(1,"green",R.drawable.green1);
+    Card c2=new Card(1,"blue",R.drawable.blue1);
+    Card c3 =new Card(1,"yellow",R.drawable.yellow1);
+    Card c4 =new Card(3,"red",R.drawable.red3);
+    Card c5 =new Card(3,"blue",R.drawable.blue3);
+    Card c6 =new Card(3,"green",R.drawable.green3);
+    Card c7 =new Card(3,"yellow",R.drawable.yellow3);
+    Card c8 =new Card(4,"red",R.drawable.red4);
+    Card c9 =new Card(4,"blue",R.drawable.blue4);
+    Card c10 =new Card(4,"yellow",R.drawable.yellow4);
+    Card c11 =new Card(4,"green",R.drawable.green4);
+    arrCards[0]=c0;
+    arrCards[1]=c1;
+    arrCards[2]=c2;
+    arrCards[3]=c3;
+    arrCards[4]=c4;
+    arrCards[5]=c5;
+    arrCards[6]=c6;
+    arrCards[7]=c7;
+    arrCards[8]=c8;
+    arrCards[9]=c9;
+    arrCards[10]=c10;
+    arrCards[11]=c11;
+}
 }
