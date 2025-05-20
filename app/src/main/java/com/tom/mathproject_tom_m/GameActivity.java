@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -17,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
     private String Username3;
     Button kupa;
     ImageView garbage;
+   private Card MainCard;
   private  RecyclerView RCard;
 
    private ArrayList<Card> cards;//recycleview
@@ -26,21 +28,32 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        cards=new ArrayList<>();
-        arrCards =new Card[12];
         initview();
-        creatcards();
         CreatRecicleViwe();
         Intent intent = getIntent();
         Username3= intent.getStringExtra("UserName2");
         Card c1=new Card(1,"green",R.drawable.green1);
 
+
     }
 
     private void initview() {
 RCard=findViewById(R.id.RCard);
+        kupa=findViewById(R.id.kupa);
+        garbage=findViewById(R.id.garbage);
+        arrCards =new Card[12];
         creatArrCards();
+        MainCard=RandomCard();
+        garbage.setImageResource( MainCard.getImage());
+        cards=new ArrayList<>();
         startGame();
+        kupa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cards.add(RandomCard());
+            }
+        });
+
     }
     public void creatcards(){
         cards.add(new Card(1,"blue",R.drawable.blue1));
@@ -53,7 +66,11 @@ RCard=findViewById(R.id.RCard);
          adapterCard2 = new AdapterCard(cards, new AdapterCard.OnItemClickListener1() {
                     @Override
                     public void onItemClick(Card carditem) {
-
+                      if(checkCard(carditem,MainCard)) {
+                          MainCard = carditem;
+                          garbage.setImageResource(MainCard.getImage());
+                          cards.remove(carditem);
+                      }
                     }
                 });
         RCard.setLayoutManager(new LinearLayoutManager(this));
@@ -62,8 +79,8 @@ RCard=findViewById(R.id.RCard);
     }
     public Card RandomCard(){
         int num= (int) (Math.random()*12);
-        Card c1=arrCards[num];
-        return c1;
+        Card c2=arrCards[num];
+        return c2;
     }
     public void startGame(){
         for(int i=0;i<8;i++){

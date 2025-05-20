@@ -15,11 +15,11 @@
         <activity
             android:name=".GameActivity"
             android:exported="true">
-<!--                        <intent-filter>-->
-<!--                            <action android:name="android.intent.action.MAIN" />-->
+                        <!--<intent-filter>
+                           <action android:name="android.intent.action.MAIN" />
 
-<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                        </intent-filter>-->
+                           <category android:name="android.intent.category.LAUNCHER" />
+                       </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -40,6 +40,7 @@
         <activity
             android:name=".MainActivityTaki123"
             android:exported="false">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -61,7 +62,11 @@
         <activity
             android:name=".mathproj.LoginActivity"
             android:exported="true">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
 
             <meta-data
                 android:name="android.app.lib_name"

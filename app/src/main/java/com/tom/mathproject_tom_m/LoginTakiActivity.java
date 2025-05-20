@@ -40,7 +40,7 @@ Button btSignUp;
         initview();
 
        if (auth.getCurrentUser()!=null) {
-           Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+           Intent intent = new Intent(LoginTakiActivity.this,GameActivity.class );// MainActivityTaki123.class);
            intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
            startActivity(intent);
        }
