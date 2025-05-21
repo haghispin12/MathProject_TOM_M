@@ -41,18 +41,39 @@ public class GAME {
     String Uid1;
     String Uid2;
     int Status;
+
+    public int getCurrentnum() {
+        return currentnum;
+    }
+
+    public void setCurrentnum(int currentnum) {
+        this.currentnum = currentnum;
+    }
+
+    public String getCurrenrcolor() {
+        return currenrcolor;
+    }
+
+    public void setCurrenrcolor(String currenrcolor) {
+        this.currenrcolor = currenrcolor;
+    }
+
     int currentnum;
     String currenrcolor;
     public GAME(String IdGame,String uid2 ){
         this.IdGame=IdGame;
         this.Uid2=Uid2;
         this.Status=1;
+        this.currenrcolor=null;
+        this.currentnum=0;
     }
 
     public GAME(String Uid1){
         this.IdGame= UUID.randomUUID().toString();
         this.Uid1=Uid1;
         this.Status=0;
+        this.currenrcolor=null;
+        this.currentnum=0;
     }
 
 }

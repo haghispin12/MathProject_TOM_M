@@ -1,6 +1,7 @@
 package com.tom.mathproject_tom_m;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +17,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.tom.mathproject_tom_m.mathproj.User;
 
 import java.util.ArrayList;
@@ -159,5 +166,32 @@ public void creatArrCards(){
                 c=arrCards[i];
         }
         return c;
+    }
+    public void onchangeCard(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference userDocRef = db.collection("games").document(DocumentId1);
+        //Query activeUsersQuery = db.collection("users").whereEqualTo("isActive", true);
+        ListenerRegistration userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w("FirestoreListener", "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d("FirestoreListener", "Current user data: " + snapshot.getData());
+                    // Process the document data here (Java)
+                    double Currentnum = snapshot.getDouble("currentnum");
+                    String Currentcolor =snapshot.getString("currentcolor");
+                    MainCard=onChangeMainCard((int)Currentnum,Currentcolor);
+                    garbage.setImageResource(MainCard.getImage());
+
+
+                } else {
+                    Log.d("FirestoreListener", "Current data: null");
+                }
+            }
+        });
     }
 }
