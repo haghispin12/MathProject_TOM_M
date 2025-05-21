@@ -1,6 +1,8 @@
 package com.tom.mathproject_tom_m;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.tom.mathproject_tom_m.mathproj.User;
 
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView garbage;
    private Card MainCard;
   private  RecyclerView RCard;
+  private String DocumentId1;
 
    private ArrayList<Card> cards;//recycleview
    Card [] arrCards;//מערך של כל הקלפים שיש
@@ -32,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
         CreatRecicleViwe();
         Intent intent = getIntent();
         Username3= intent.getStringExtra("UserName2");
+        DocumentId1=intent.getStringExtra("DocumentId");
         Card c1=new Card(1,"green",R.drawable.green1);
 
 
@@ -51,6 +59,8 @@ RCard=findViewById(R.id.RCard);
             @Override
             public void onClick(View view) {
                 cards.add(RandomCard());
+                adapterCard2.updateArr(cards);
+                adapterCard2.notifyDataSetChanged();
             }
         });
 
@@ -70,10 +80,13 @@ RCard=findViewById(R.id.RCard);
                           MainCard = carditem;
                           garbage.setImageResource(MainCard.getImage());
                           cards.remove(carditem);
+                          adapterCard2.updateArr(cards);
+                          adapterCard2.notifyDataSetChanged();
+                          updateSingl1(DocumentId1);
                       }
                     }
                 });
-        RCard.setLayoutManager(new LinearLayoutManager(this));
+        RCard.setLayoutManager(new GridLayoutManager(this,4));
         RCard.setAdapter(adapterCard2);
         RCard.setHasFixedSize(true);
     }
@@ -124,4 +137,27 @@ public void creatArrCards(){
     arrCards[10]=c10;
     arrCards[11]=c11;
 }
+    public void updateSingl1(String documantId){//עדכון  ערכי הקלף בשרת
+        FirebaseFirestore.getInstance().collection("games").document(documantId).update("currentnum",MainCard.getNumber(),"currentcolor",MainCard.getColor()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(GameActivity.this, "update student has been success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GameActivity.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public Card onChangeMainCard(int num,String color){
+        Card c=new Card();
+        for(int i=0;i<arrCards.length;i++){
+            if(arrCards[i].getNumber()==num && arrCards[i].getColor().equals(color))
+                c=arrCards[i];
+        }
+        return c;
+    }
 }

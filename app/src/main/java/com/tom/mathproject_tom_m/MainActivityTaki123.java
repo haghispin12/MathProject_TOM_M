@@ -39,6 +39,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
     EditText iD;
     Button OkStartGame;
     private GAME game1;
+    String Documentid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
                      updateSingl(s1);
                      Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                      intent.putExtra("UserName2", Username2);
+                     intent.putExtra("DocumentId", Documentid);
                      //  intent.putExtra("Game", game1);
                      startActivity(intent);
                  }
@@ -113,6 +115,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 Log.d("documentid",task.getResult().getId());
+                Documentid=task.getResult().getId();
                 Gameid.setText(task.getResult().getId());
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference userDocRef = db.collection("games").document(task.getResult().getId());

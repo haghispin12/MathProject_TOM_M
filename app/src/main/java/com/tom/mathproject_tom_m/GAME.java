@@ -41,6 +41,8 @@ public class GAME {
     String Uid1;
     String Uid2;
     int Status;
+    int currentnum;
+    String currenrcolor;
     public GAME(String IdGame,String uid2 ){
         this.IdGame=IdGame;
         this.Uid2=Uid2;

@@ -16,7 +16,23 @@ public interface OnItemClickListener1 {
     void onItemClick(Card item);
 }
 
-private ArrayList<Card>cards;
+         public ArrayList<Card> getCards() {
+             return cards;
+         }
+
+         public void setCards(ArrayList<Card> cards) {
+             this.cards = cards;
+         }
+
+         public OnItemClickListener1 getListener() {
+             return listener;
+         }
+
+         public void setListener(OnItemClickListener1 listener) {
+             this.listener = listener;
+         }
+
+         private ArrayList<Card>cards;
 private OnItemClickListener1 listener;
 
 public AdapterCard (ArrayList<Card>cards, OnItemClickListener1
@@ -63,7 +79,10 @@ public static class MyViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
-}//end inner class
+}
+public void updateArr(ArrayList<Card>cards2){
+    cards=cards2;
+}
 }//end class
 
 

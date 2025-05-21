@@ -34,5 +34,7 @@ public class Card {
     public void setColor(String color) {
         Color = color;
     }
+    public Card(){
+    }
 
 }
