@@ -2,11 +2,13 @@ package com.tom.mathproject_tom_m;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
    private ArrayList<Card> cards;//recycleview
    Card [] arrCards;//מערך של כל הקלפים שיש
   private AdapterCard adapterCard2;
+  private  boolean isyourTurn;
+  public boolean  isLooser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
         Username3= intent.getStringExtra("UserName2");
         DocumentId1=intent.getStringExtra("DocumentId");
         Card c1=new Card(1,"green",R.drawable.green1);
+        onchangeCard();
 
 
     }
@@ -65,11 +70,15 @@ RCard=findViewById(R.id.RCard);
         kupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cards.add(RandomCard());
-                adapterCard2.updateArr(cards);
-                adapterCard2.notifyDataSetChanged();
+                if(isyourTurn) {
+                    cards.add(RandomCard());
+                    adapterCard2.updateArr(cards);
+                    adapterCard2.notifyDataSetChanged();
+                    updateTurn( DocumentId1);
+                }
             }
         });
+
 
     }
     public void creatcards(){
@@ -83,14 +92,21 @@ RCard=findViewById(R.id.RCard);
          adapterCard2 = new AdapterCard(cards, new AdapterCard.OnItemClickListener1() {
                     @Override
                     public void onItemClick(Card carditem) {
-                      if(checkCard(carditem,MainCard)) {
-                          MainCard = carditem;
-                          garbage.setImageResource(MainCard.getImage());
-                          cards.remove(carditem);
-                          adapterCard2.updateArr(cards);
-                          adapterCard2.notifyDataSetChanged();
-                          updateSingl1(DocumentId1);
-                      }
+                        if (isyourTurn) {
+                            if (checkCard(carditem, MainCard)) {
+                                MainCard = carditem;
+                                garbage.setImageResource(MainCard.getImage());
+                                cards.remove(carditem);
+                                adapterCard2.updateArr(cards);
+                                adapterCard2.notifyDataSetChanged();
+                                updateSingl1(DocumentId1);
+                                updateTurn( DocumentId1);
+                                if(cards.isEmpty()) {
+                                    updateWinner(DocumentId1);
+                                    CreatDialog("Winner","You Win");
+                                }
+                            }
+                        }
                     }
                 });
         RCard.setLayoutManager(new GridLayoutManager(this,4));
@@ -186,6 +202,15 @@ public void creatArrCards(){
                     String Currentcolor =snapshot.getString("currentcolor");
                     MainCard=onChangeMainCard((int)Currentnum,Currentcolor);
                     garbage.setImageResource(MainCard.getImage());
+                    String Turn=snapshot.getString("Turn");
+                    if(Turn.equals(Username3))
+                        isyourTurn=false;
+                    else {
+                        isyourTurn = true;
+                    }
+                    String Winner1=snapshot.getString("Winner");
+                    if(!Winner1.equals(Username3) && Winner1!=null)
+                        CreatDialog("Looser","You lose");
 
 
                 } else {
@@ -194,4 +219,49 @@ public void creatArrCards(){
             }
         });
     }
+    public void updateTurn(String documantId){//עדכון  התר
+        FirebaseFirestore.getInstance().collection("games").document(documantId).update("Turn",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(GameActivity.this, "update student has been success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GameActivity.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public void updateWinner(String documantId){//עדכון  התר
+        FirebaseFirestore.getInstance().collection("games").document(documantId).update("Winner",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(GameActivity.this, "update student has been success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GameActivity.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+public void CreatDialog(String title,String mesage){
+    AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+    alertDialog.setTitle("title");
+    alertDialog.setMessage(mesage);
+    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            alertDialog.show();
+            Intent intent = new Intent(GameActivity.this, MainActivityTaki123.class );
+
+        }
+
+            });
+
+}
 }

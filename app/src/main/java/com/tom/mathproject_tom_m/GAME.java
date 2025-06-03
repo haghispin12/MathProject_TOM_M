@@ -41,6 +41,9 @@ public class GAME {
     String Uid1;
     String Uid2;
     int Status;
+    String Winner;
+    String Turn;
+    private int statusgame;
 
     public int getCurrentnum() {
         return currentnum;
@@ -66,6 +69,9 @@ public class GAME {
         this.Status=1;
         this.currenrcolor=null;
         this.currentnum=0;
+        this.statusgame=0;
+        this.Winner=null;
+        this.Turn=uid2;
     }
 
     public GAME(String Uid1){
@@ -74,6 +80,9 @@ public class GAME {
         this.Status=0;
         this.currenrcolor=null;
         this.currentnum=0;
+        this.statusgame=0;
+        this.Winner=null;
+        this.Turn=Uid1;
     }
 
 }
