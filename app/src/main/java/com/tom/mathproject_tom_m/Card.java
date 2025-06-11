@@ -35,8 +35,11 @@ public class Card {
     public void setColor(String color) {
         Color = color;
     }
-    public Card(){
+    public Card(){}
+  public boolean checkcard(Card c1){
+    if(c1.getColor().equals(Color)|| c1.getNumber()==Number)
+        return true;
+    return false;
     }
-
 
 }

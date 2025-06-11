@@ -73,8 +73,9 @@ public class MainActivityTaki123 extends AppCompatActivity {
         OkStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String s1 = String.valueOf(iD.getText());
-                 if(Gameid.getText()==s1) {
+               Documentid=s1;
                      updateSingl(s1);
                      Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                      intent.putExtra("UserName2", Username2);
@@ -82,7 +83,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
                      //  intent.putExtra("Game", game1);
                      startActivity(intent);
                  }
-                }
+
 
 
 //                FirebaseFirestore.getInstance().collection("game2").whereEqualTo().document().update("Uid2","tom").whereEqualTo("idGame","15b2610a-5a35-4387-914a-41dab894c4e3").getFirestore().document().addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -98,7 +99,6 @@ public class MainActivityTaki123 extends AppCompatActivity {
             public void onClick(View v) {
                 GameMode(game1);
                     // Example in your Application class's onCreate() method
-
 
 
                 }

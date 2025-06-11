@@ -35,15 +35,15 @@ Button btSignUp;
         setContentView(R.layout.activity_login_taki2);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         auth= FirebaseAuth.getInstance();
-
+if(auth.getCurrentUser()!=null) {
+    Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+    intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
+    startActivity(intent);
+}
        // int n=10;
         initview();
 
-       if (auth.getCurrentUser()!=null) {
-           Intent intent = new Intent(LoginTakiActivity.this,GameActivity.class );// MainActivityTaki123.class);
-           intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
-           startActivity(intent);
-       }
+
     }
 
     private void initview() {
