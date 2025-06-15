@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initview();
-        CreatRecicleViwe();
+
         Intent intent = getIntent();
         Username3= intent.getStringExtra("UserName2");
         DocumentId1=intent.getStringExtra("DocumentId");
@@ -56,10 +56,11 @@ public class GameActivity extends AppCompatActivity {
         else {
             isyourTurn=true;
         }
+        CreatRecicleViwe();
 
 
         Card c1=new Card(1,"green",R.drawable.green1);
-        onchangeCard();
+        onchangeCard(DocumentId1);
 
 
     }
@@ -142,9 +143,9 @@ RCard=findViewById(R.id.RCard);
 
     }
 
-    public void onchangeCard(){
+    public void onchangeCard(String Documentid2){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference userDocRef = db.collection("games").document(DocumentId1);
+        DocumentReference userDocRef = db.collection("games").document(Documentid2);
         //Query activeUsersQuery = db.collection("users").whereEqualTo("isActive", true);
         ListenerRegistration userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -161,14 +162,14 @@ RCard=findViewById(R.id.RCard);
                     String Currentcolor =snapshot.getString("currentcolor");
                     g1.setMainCard(g1.onChangeMainCard((int)Currentnum,Currentcolor));
                     garbage.setImageResource(g1.getMainCard().getImage());
-                    String Turn=snapshot.getString("Turn");
+                    String Turn=snapshot.getString("turn");
                     if(Turn.equals(Username3))
                         isyourTurn=false;
                     else {
                         isyourTurn = true;
                     }
-                    String Winner1=snapshot.getString("Winner");
-                    if(!Winner1.equals(Username3) && Winner1!=null)
+                    String Winner1=snapshot.getString("winner");
+                    if(!Winner1.equals(Username3) )
                         CreatDialog("Looser","You lose");
 
 

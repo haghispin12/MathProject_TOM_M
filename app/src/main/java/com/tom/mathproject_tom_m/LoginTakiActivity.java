@@ -35,12 +35,12 @@ Button btSignUp;
         setContentView(R.layout.activity_login_taki2);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         auth= FirebaseAuth.getInstance();
-if(auth.getCurrentUser()!=null) {
-    Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
-    intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
-    startActivity(intent);
-}
-       // int n=10;
+//if(auth.getCurrentUser()!=null) {
+//    Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+//    intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
+//    startActivity(intent);
+//}
+        // int n=10;
         initview();
 
 
@@ -48,7 +48,9 @@ if(auth.getCurrentUser()!=null) {
 
     private void initview() {
         etPassowrd=findViewById(R.id.etPassowrd);
+        etPassowrd.setText("12345678");
         etEmail=findViewById(R.id.etEmail);
+        etEmail.setText("tom1@gmail.com");
         btSignUp=findViewById(R.id.btSignUp);
         btConnected=findViewById(R.id.btConnected);
         btConnected.setOnClickListener(new View.OnClickListener() {

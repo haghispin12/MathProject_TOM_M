@@ -29,7 +29,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tom.mathproject_tom_m.mathproj.MainActivity;
 
-public class MainActivityTaki123 extends AppCompatActivity {
+public class  MainActivityTaki123 extends AppCompatActivity {
     private String Username2;
     Button creatgame;
     TextView Name;
@@ -80,6 +80,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
                      Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                      intent.putExtra("UserName2", Username2);
                      intent.putExtra("DocumentId", Documentid);
+
                      //  intent.putExtra("Game", game1);
                      startActivity(intent);
                  }
@@ -136,7 +137,7 @@ public class MainActivityTaki123 extends AppCompatActivity {
 
                                 Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                                 intent.putExtra("UserName2", Username2);
-                                //  intent.putExtra("Game", game1);
+                                intent.putExtra("DocumentId",Documentid);
                                 startActivity(intent);
                             }
                         } else {
