@@ -159,23 +159,26 @@ RCard=findViewById(R.id.RCard);
                     Log.d("FirestoreListener", "Current user data: " + snapshot.getData());
                     // Process the document data here (Java)
                     double Currentnum = snapshot.getDouble("currentnum");
-                    String Currentcolor =snapshot.getString("currentcolor");
-                    g1.setMainCard(g1.onChangeMainCard((int)Currentnum,Currentcolor));
+                    String Currentcolor = snapshot.getString("currentcolor");
+                    g1.setMainCard(g1.onChangeMainCard((int) Currentnum, Currentcolor));
                     garbage.setImageResource(g1.getMainCard().getImage());
-                    String Turn=snapshot.getString("turn");
-                    if(Turn.equals(Username3))
-                        isyourTurn=false;
+                    String Turn = snapshot.getString("turn");
+                    if (Turn.equals(Username3))
+                        isyourTurn = false;
                     else {
                         isyourTurn = true;
                     }
-                    String Winner1=snapshot.getString("winner");
-                    if(!Winner1.equals(Username3) )
-                        CreatDialog("Looser","You lose");
+                    String Winner1 = snapshot.getString("winner");
+
+                        if ( Winner1 != null &&  !Winner1.equals(Username3))
+                            CreatDialog("Looser", "You lose");
 
 
-                } else {
-                    Log.d("FirestoreListener", "Current data: null");
-                }
+
+                }else {
+                        Log.d("FirestoreListener", "Current data: null");
+                    }
+
             }
         });
     }
