@@ -109,6 +109,8 @@ public class  MainActivityTaki123 extends AppCompatActivity {
         });
     }
 
+    ListenerRegistration userListenerRegistration;
+
     public void GameMode(GAME games) {
 
 
@@ -121,7 +123,7 @@ public class  MainActivityTaki123 extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference userDocRef = db.collection("games").document(task.getResult().getId());
                 //Query activeUsersQuery = db.collection("users").whereEqualTo("isActive", true);
-                ListenerRegistration userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
@@ -134,11 +136,12 @@ public class  MainActivityTaki123 extends AppCompatActivity {
                             // Process the document data here (Java)
                             double Status = snapshot.getDouble("status");
                             if(Status==1){
-
+                                userListenerRegistration.remove();
                                 Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                                 intent.putExtra("UserName2", Username2);
                                 intent.putExtra("DocumentId",Documentid);
                                 startActivity(intent);
+
                             }
                         } else {
                             Log.d("FirestoreListener", "Current data: null");

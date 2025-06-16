@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
    private ArrayList<Card> cards;//recycleview
   private GAME g1=new GAME(Username3);
   private AdapterCard adapterCard2;
-  private  boolean isyourTurn;
+
   public boolean  isLooser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +51,6 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Username3= intent.getStringExtra("UserName2");
         DocumentId1=intent.getStringExtra("DocumentId");
-        if(Username3.equals(g1.getTurn()))
-            isyourTurn=  false;
-        else {
-            isyourTurn=true;
-        }
         CreatRecicleViwe();
 
 
@@ -69,20 +64,18 @@ public class GameActivity extends AppCompatActivity {
 RCard=findViewById(R.id.RCard);
         kupa=findViewById(R.id.kupa);
         garbage=findViewById(R.id.garbage);
-        g1.setMainCard(g1.RandomCard());
         garbage.setImageResource( g1.getMainCard().getImage());
         cards=new ArrayList<>();
         startGame();
         kupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isyourTurn) {
+
                     cards.add(g1.RandomCard());
                     adapterCard2.updateArr(cards);
                     adapterCard2.notifyDataSetChanged();
-                    updateTurn( DocumentId1);
                 }
-            }
+
         });
 
 
@@ -92,7 +85,7 @@ RCard=findViewById(R.id.RCard);
          adapterCard2 = new AdapterCard(cards, new AdapterCard.OnItemClickListener1() {
                     @Override
                     public void onItemClick(Card carditem) {
-                        if (isyourTurn) {
+
                             if (carditem.checkcard(g1.getMainCard())) {
                                 g1.setMainCard(carditem)  ;
                                 garbage.setImageResource(g1.getMainCard().getImage());
@@ -100,14 +93,14 @@ RCard=findViewById(R.id.RCard);
                                 adapterCard2.updateArr(cards);
                                 adapterCard2.notifyDataSetChanged();
                                 updateSingl1(DocumentId1);
-                                updateTurn( DocumentId1);
+
                                 if(cards.get(0)==null) {
                                     updateWinner(DocumentId1);
                                     CreatDialog("Winner","You Win");
                                 }
                             }
                         }
-                    }
+
                 });
         RCard.setLayoutManager(new GridLayoutManager(this,4));
         RCard.setAdapter(adapterCard2);
@@ -143,71 +136,66 @@ RCard=findViewById(R.id.RCard);
 
     }
 
-    public void onchangeCard(String Documentid2){
+    boolean isFirst = true;
+
+    public void onchangeCard(String Documentid2) {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = db.collection("games").document(Documentid2);
         //Query activeUsersQuery = db.collection("users").whereEqualTo("isActive", true);
         ListenerRegistration userListenerRegistration = userDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w("FirestoreListener", "Listen failed.", e);
-                    return;
-                }
 
-                if (snapshot != null && snapshot.exists()) {
-                    Log.d("FirestoreListener", "Current user data: " + snapshot.getData());
-                    // Process the document data here (Java)
-                    double Currentnum = snapshot.getDouble("currentnum");
-                    String Currentcolor = snapshot.getString("currentcolor");
-                    g1.setMainCard(g1.onChangeMainCard((int) Currentnum, Currentcolor));
-                    garbage.setImageResource(g1.getMainCard().getImage());
-                    String Turn = snapshot.getString("turn");
-                    if (Turn.equals(Username3))
-                        isyourTurn = false;
-                    else {
-                        isyourTurn = true;
+
+
+                    if (e != null) {
+                        Log.w("FirestoreListener", "Listen failed.", e);
+                        return;
                     }
-                    String Winner1 = snapshot.getString("winner");
 
-                        if ( Winner1 != null &&  !Winner1.equals(Username3))
+                    if (snapshot != null && snapshot.exists()) {
+                        Log.d("FirestoreListener", "Current user data: " + snapshot.getData());
+                        // Process the document data here (Java)
+                        double Currentnum = snapshot.getDouble("currentnum");
+                        String Currentcolor = snapshot.getString("currentcolor");
+
+
+                        if(!isFirst) {
+                           g1.setMainCard(g1.onChangeMainCard((int) Currentnum, Currentcolor));
+                           garbage.setImageResource(g1.getMainCard().getImage());
+                        }else {
+                            isFirst=false;
+                        }
+
+                        String Winner1 = snapshot.getString("winner");
+
+                        if (Winner1 != null && !Winner1.equals(Username3))
                             CreatDialog("Looser", "You lose");
 
 
-
-                }else {
+                    } else {
                         Log.d("FirestoreListener", "Current data: null");
                     }
 
-            }
-        });
-    }
-    public void updateTurn(String documantId){//עדכון  התר
-        FirebaseFirestore.getInstance().collection("games").document(documantId).update("Turn",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(GameActivity.this, "update student has been success", Toast.LENGTH_SHORT).show();
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(GameActivity.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+
             }
         });
 
     }
+
     public void updateWinner(String documantId){//עדכון  התר
-        FirebaseFirestore.getInstance().collection("games").document(documantId).update("Winner",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseFirestore.getInstance().collection("games").document(documantId).update("winner",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(GameActivity.this, "update student has been success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "update winner has been success", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(GameActivity.this, "update student has been failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "update winner has been failed", Toast.LENGTH_SHORT).show();
             }
         });
 
