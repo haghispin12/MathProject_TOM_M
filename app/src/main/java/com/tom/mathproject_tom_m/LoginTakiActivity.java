@@ -36,7 +36,7 @@ Button btSignUp;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         auth= FirebaseAuth.getInstance();
 //if(auth.getCurrentUser()!=null) {
-//    Intent intent = new Intent(LoginTakiActivity.this, MainActivityTaki123.class);
+//    Intent intent = new Intent(LoginTakiActivity.this, GameActivity.class);
 //    intent.putExtra("UserName2", auth.getCurrentUser().getEmail());
 //    startActivity(intent);
 //}

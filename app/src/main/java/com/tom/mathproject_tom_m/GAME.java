@@ -129,7 +129,8 @@ public class GAME {
         this.Turn=Uid1;
         this.arrCards=new ArrayList<>();
         creatArrCards();
-        this.MainCard=RandomCard();
+        Card c0 =new Card(1,"red",R.drawable.red1);
+        this.MainCard=c0;
     }
     public void creatArrCards(){
         Card c0 =new Card(1,"red",R.drawable.red1);

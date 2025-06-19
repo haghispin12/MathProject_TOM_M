@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
 
   private  RecyclerView RCard;
   private String DocumentId1;
-
+//private  Intent inn = new Intent(this, MyService.class);
    private ArrayList<Card> cards;//recycleview
   private GAME g1=new GAME(Username3);
   private AdapterCard adapterCard2;
@@ -52,6 +52,10 @@ public class GameActivity extends AppCompatActivity {
         Username3= intent.getStringExtra("UserName2");
         DocumentId1=intent.getStringExtra("DocumentId");
         CreatRecicleViwe();
+
+
+        Intent inn1 = new Intent(this, MyService.class);
+        startForegroundService(inn1);
 
 
         Card c1=new Card(1,"green",R.drawable.green1);
@@ -208,6 +212,8 @@ public void CreatDialog(String title,String mesage){
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             alertDialog.show();
+            Intent inn2 = new Intent(GameActivity.this, MyService.class);
+          stopService(inn2);
             Intent intent = new Intent(GameActivity.this, MainActivityTaki123.class );
 
         }
