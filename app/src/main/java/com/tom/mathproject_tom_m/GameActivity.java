@@ -98,7 +98,7 @@ RCard=findViewById(R.id.RCard);
                                 adapterCard2.notifyDataSetChanged();
                                 updateSingl1(DocumentId1);
 
-                                if(cards.get(0)==null) {
+                                if(cards.isEmpty()) {
                                     updateWinner(DocumentId1);
                                     CreatDialog("Winner","You Win");
                                 }
@@ -208,17 +208,20 @@ public void CreatDialog(String title,String mesage){
     AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
     alertDialog.setTitle("title");
     alertDialog.setMessage(mesage);
-    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",new DialogInterface.OnClickListener() {
+    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",new DialogInterface.OnClickListener()
+    {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            alertDialog.show();
+
             Intent inn2 = new Intent(GameActivity.this, MyService.class);
           stopService(inn2);
             Intent intent = new Intent(GameActivity.this, MainActivityTaki123.class );
-
+startActivity(intent);
         }
 
             });
+
+    alertDialog.show();
 
 }
 }
