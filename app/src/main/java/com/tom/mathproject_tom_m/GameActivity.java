@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private String Username3;
+    int n;
     Button kupa;
     ImageView garbage;
     private boolean isyourTurn;
@@ -86,7 +87,10 @@ RCard=findViewById(R.id.RCard);
                     adapterCard2.updateArr(cards);
                     adapterCard2.notifyDataSetChanged();
                     isyourTurn=false;
-                  //  updateTurn(DocumentId1);
+                    updateTurn(DocumentId1);
+                }
+                else {
+                    Toast.makeText(GameActivity.this, "not your turn", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -116,6 +120,9 @@ RCard=findViewById(R.id.RCard);
 
                }
            }
+                    else {
+                        Toast.makeText(GameActivity.this, "not your turn", Toast.LENGTH_SHORT).show();
+                    }
                         }
 
                 });
@@ -194,6 +201,8 @@ RCard=findViewById(R.id.RCard);
                       if (!Turn1.equals(Username3)) {
                           isyourTurn = true;
                  //         Toast.makeText(GameActivity.this, "listening has been success", Toast.LENGTH_SHORT).show();
+                      }else {
+                          isyourTurn=false;
                       }
                     } else {
                         Log.d("FirestoreListener", "Current data: null");
@@ -237,9 +246,17 @@ RCard=findViewById(R.id.RCard);
 
     }
 public void CreatDialog(String title,String mesage){
+
     AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
     alertDialog.setTitle("title");
-    alertDialog.setMessage(mesage);
+    if (mesage.equals("You lose")) {
+        alertDialog.setMessage(mesage);
+        n=5;
+    }
+    if (mesage.equals("You win")){
+        alertDialog.setMessage(mesage);
+        n=10;
+    }
     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",new DialogInterface.OnClickListener()
     {
         @Override

@@ -33,18 +33,20 @@ public class  MainActivityTaki123 extends AppCompatActivity {
     private String Username2;
     Button creatgame;
     TextView Name;
-    TextView Score12;
-    TextView Gameid;
+
+    EditText Gameid;
     Button JoinGame;
     EditText iD;
     Button OkStartGame;
     private GAME game1;
     String Documentid;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_taki123);
+
 
         initview();
         Intent intent = getIntent();
@@ -52,13 +54,14 @@ public class  MainActivityTaki123 extends AppCompatActivity {
         Toast.makeText(MainActivityTaki123.this, Username2, Toast.LENGTH_LONG).show();
         Name.setText(Username2);
         game1 = new GAME(Username2);
+        iD.setVisibility(View.INVISIBLE);
+        OkStartGame.setVisibility(View.INVISIBLE);
+
      }
 
     private void initview() {
         creatgame = findViewById(R.id.creatgame);
         Name = findViewById(R.id.Name);
-
-        Score12 = findViewById(R.id.Score12);
         Gameid = findViewById(R.id.Gameid);
         JoinGame = findViewById(R.id.JoinGame);
         iD = findViewById(R.id.iD);

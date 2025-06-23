@@ -14,12 +14,7 @@
         android:layout_height="50dp"
         android:id="@+id/Name"
         android:text="username12"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/Score12"
 
-            android:text="Score:"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +30,7 @@
                 android:layout_height="75dp"
                 android:id="@+id/creatgame"
                 android:text="CREAT GAME"/>
-            <TextView
+            <EditText
                 android:layout_width="100dp"
                 android:layout_height="75dp"
                 android:id="@+id/Gameid"
