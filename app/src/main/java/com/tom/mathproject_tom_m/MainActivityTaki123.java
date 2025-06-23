@@ -80,6 +80,7 @@ public class  MainActivityTaki123 extends AppCompatActivity {
                      Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                      intent.putExtra("UserName2", Username2);
                      intent.putExtra("DocumentId", Documentid);
+                     intent.putExtra("Turn","true");
 
                      //  intent.putExtra("Game", game1);
                      startActivity(intent);
@@ -137,9 +138,11 @@ public class  MainActivityTaki123 extends AppCompatActivity {
                             double Status = snapshot.getDouble("status");
                             if(Status==1){
                                 userListenerRegistration.remove();
+
                                 Intent intent = new Intent(MainActivityTaki123.this, GameActivity.class);
                                 intent.putExtra("UserName2", Username2);
                                 intent.putExtra("DocumentId",Documentid);
+                                intent.putExtra("Turn","false");
                                 startActivity(intent);
 
                             }

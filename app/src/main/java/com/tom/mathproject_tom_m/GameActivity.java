@@ -33,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     private String Username3;
     Button kupa;
     ImageView garbage;
+    private boolean isyourTurn;
 
   private  RecyclerView RCard;
   private String DocumentId1;
@@ -51,6 +52,12 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Username3= intent.getStringExtra("UserName2");
         DocumentId1=intent.getStringExtra("DocumentId");
+//       if(intent.getStringExtra("Turn").equals("true"))
+//      isyourTurn=true;
+//       else {
+//           isyourTurn=false;
+//       }
+        isyourTurn=true;
         CreatRecicleViwe();
 
 
@@ -74,11 +81,14 @@ RCard=findViewById(R.id.RCard);
         kupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (isyourTurn==true) {
                     cards.add(g1.RandomCard());
                     adapterCard2.updateArr(cards);
                     adapterCard2.notifyDataSetChanged();
+                    isyourTurn=false;
+                  //  updateTurn(DocumentId1);
                 }
+            }
 
         });
 
@@ -89,20 +99,23 @@ RCard=findViewById(R.id.RCard);
          adapterCard2 = new AdapterCard(cards, new AdapterCard.OnItemClickListener1() {
                     @Override
                     public void onItemClick(Card carditem) {
+                    if (isyourTurn==true) {
+                     if (carditem.checkcard(g1.getMainCard())) {
+                            g1.setMainCard(carditem);
+                         garbage.setImageResource(g1.getMainCard().getImage());
+                              cards.remove(carditem);
+                            adapterCard2.updateArr(cards);
+                          adapterCard2.notifyDataSetChanged();
+                               updateSingl1(DocumentId1);
+                               updateTurn(DocumentId1);
+                         isyourTurn=false;
+                           if (cards.isEmpty()) {
+                       updateWinner(DocumentId1);
+                        CreatDialog("Winner", "You Win");
+                 }
 
-                            if (carditem.checkcard(g1.getMainCard())) {
-                                g1.setMainCard(carditem)  ;
-                                garbage.setImageResource(g1.getMainCard().getImage());
-                                cards.remove(carditem);
-                                adapterCard2.updateArr(cards);
-                                adapterCard2.notifyDataSetChanged();
-                                updateSingl1(DocumentId1);
-
-                                if(cards.isEmpty()) {
-                                    updateWinner(DocumentId1);
-                                    CreatDialog("Winner","You Win");
-                                }
-                            }
+               }
+           }
                         }
 
                 });
@@ -177,7 +190,11 @@ RCard=findViewById(R.id.RCard);
                         if (Winner1 != null && !Winner1.equals(Username3))
                             CreatDialog("Looser", "You lose");
 
-
+                      String Turn1=snapshot.getString("turn");
+                      if (!Turn1.equals(Username3)) {
+                          isyourTurn = true;
+                 //         Toast.makeText(GameActivity.this, "listening has been success", Toast.LENGTH_SHORT).show();
+                      }
                     } else {
                         Log.d("FirestoreListener", "Current data: null");
                     }
@@ -200,6 +217,21 @@ RCard=findViewById(R.id.RCard);
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(GameActivity.this, "update winner has been failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public void updateTurn(String DocumentId){
+        FirebaseFirestore.getInstance().collection("games").document(DocumentId).update("turn",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(GameActivity.this, "update Turn has been success", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GameActivity.this, "update Turn has been failed", Toast.LENGTH_SHORT).show();
             }
         });
 
