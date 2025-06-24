@@ -132,7 +132,7 @@ public class GAME {
         Card c0 =new Card(1,"red",R.drawable.red1);
         this.MainCard=c0;
     }
-    public void creatArrCards(){
+    public void creatArrCards(){//פעולה היוצרת מערך המכיל את כל הקלפים
         Card c0 =new Card(1,"red",R.drawable.red1);
         Card c1 =new Card(1,"green",R.drawable.green1);
         Card c2=new Card(1,"blue",R.drawable.blue1);
@@ -163,7 +163,7 @@ public class GAME {
         Card c2=arrCards.get(num);
         return c2;
     }
-    public Card onChangeMainCard(int num,String color){//$
+    public Card onChangeMainCard(int num,String color){//פעולה המקבלת צבע ןמספר ומחזירה את הקלף המתאים אליהם
         Card c=new Card();
         for(int i=0;i<arrCards.size();i++){
             if(arrCards.get(i).getNumber()==num && arrCards.get(i).getColor().equals(color))

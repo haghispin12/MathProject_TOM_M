@@ -119,10 +119,14 @@ RCard=findViewById(R.id.RCard);
                  }
 
                }
+                     else {
+                         Toast.makeText(GameActivity.this, "this card isnt good", Toast.LENGTH_SHORT).show();
+                     }
            }
                     else {
                         Toast.makeText(GameActivity.this, "not your turn", Toast.LENGTH_SHORT).show();
                     }
+
                         }
 
                 });
@@ -131,7 +135,7 @@ RCard=findViewById(R.id.RCard);
         RCard.setHasFixedSize(true);
     }
 
-    public void startGame(){
+    public void startGame(){//פעולה המחלקת בתחילת המשחק לשחקן 8 קלפים רנדומלים
         for(int i=0;i<8;i++){
             cards.add( g1.RandomCard());
         }
@@ -144,7 +148,7 @@ RCard=findViewById(R.id.RCard);
     }
 
 
-    public void updateSingl1(String documantId){//עדכון  ערכי הקלף בשרת
+    public void updateSingl1(String documantId){//עדכון  ערכי הקלף המרכזי  בשרת
         FirebaseFirestore.getInstance().collection("games").document(documantId).update("currentnum",g1.getMainCard().getNumber(),"currentcolor",g1.getMainCard().getColor()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -162,7 +166,7 @@ RCard=findViewById(R.id.RCard);
 
     boolean isFirst = true;
 
-    public void onchangeCard(String Documentid2) {
+    public void onchangeCard(String Documentid2) {//פעולת האזנה אל המשתנים שבענן
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = db.collection("games").document(Documentid2);
@@ -215,7 +219,7 @@ RCard=findViewById(R.id.RCard);
 
     }
 
-    public void updateWinner(String documantId){//עדכון  התר
+    public void updateWinner(String documantId){//עדכון  המנצח בענן
         FirebaseFirestore.getInstance().collection("games").document(documantId).update("winner",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -230,7 +234,7 @@ RCard=findViewById(R.id.RCard);
         });
 
     }
-    public void updateTurn(String DocumentId){
+    public void updateTurn(String DocumentId){//עדכון התור בענן
         FirebaseFirestore.getInstance().collection("games").document(DocumentId).update("turn",Username3).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -245,18 +249,14 @@ RCard=findViewById(R.id.RCard);
         });
 
     }
-public void CreatDialog(String title,String mesage){
+public void CreatDialog(String title,String mesage){//פעולה היוצרת דיאלוג של מנצח או מפסיד
 
     AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
     alertDialog.setTitle("title");
-    if (mesage.equals("You lose")) {
+
         alertDialog.setMessage(mesage);
-        n=5;
-    }
-    if (mesage.equals("You win")){
-        alertDialog.setMessage(mesage);
-        n=10;
-    }
+
+
     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",new DialogInterface.OnClickListener()
     {
         @Override

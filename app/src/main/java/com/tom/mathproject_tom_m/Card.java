@@ -36,7 +36,7 @@ public class Card {
         Color = color;
     }
     public Card(){}
-  public boolean checkcard(Card c1){
+  public boolean checkcard(Card c1){//פעולה הבודקת האם קלף כלשהו שווה לקלף הנוכחי
     if(c1.getColor().equals(Color)|| c1.getNumber()==Number)
         return true;
     return false;

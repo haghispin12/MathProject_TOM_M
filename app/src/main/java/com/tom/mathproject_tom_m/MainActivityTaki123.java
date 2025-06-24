@@ -115,7 +115,7 @@ public class  MainActivityTaki123 extends AppCompatActivity {
 
     ListenerRegistration userListenerRegistration;
 
-    public void GameMode(GAME games) {
+    public void GameMode(GAME games) {//פעולה היוצרת האזנה אל הענן וכאשר מצטרף שחקן שני למשחק הפעולה תיצור משחק בענן ותיצור את מסד הנתונים של המשחק ובנוסף תשלח את השחקן אל מסך המשחק
 
 
         FirebaseFirestore.getInstance().collection("games").add(games).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -172,7 +172,7 @@ public class  MainActivityTaki123 extends AppCompatActivity {
 //                    }
 //                });
     }
-    public void updateSingl(String documantId){
+    public void updateSingl(String documantId){//פעולה המעדכנת את שם המשתמש של שחקן 2 ואת סטטוס המשחק ל1 בענן
         FirebaseFirestore.getInstance().collection("games").document(documantId).update("uid2",Username2,"status",1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

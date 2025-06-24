@@ -29,14 +29,14 @@ public class MyService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {//פעולה המפעילה את המוזיקה
         Log.d("testService","start");
         creatMusic();;
         return START_STICKY;
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy() {//פעולה שפועלת כאשר המוזיקה מפסיקה לםעול
         Log.d("testService","end");
         super.onDestroy();
     }
@@ -95,7 +95,7 @@ public class MyService extends Service {
         return channelId;
 
     }
-   public  void creatMusic() {
+   public  void creatMusic() {//פעולה היוצרת מוזיקה על מנת שהמערכת תוכל לנגן אותה
        MediaPlayer mp = new MediaPlayer();
        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
            @Override
